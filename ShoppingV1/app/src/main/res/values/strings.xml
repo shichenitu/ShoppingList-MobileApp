@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShoppingV1</string>
+    <string name="list_label">Shopping list</string>
+    <string name="list_button_label">List all items</string>
+</resources>
