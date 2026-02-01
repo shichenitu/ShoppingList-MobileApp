@@ -46,7 +46,7 @@ fun ShoppingListScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        Button(onClick = { showShoppingList = false }) {
+        Button(onClick = { showShoppingList = true }) {
             Text(text = stringResource(id = R.string.list_button_label))
         }
     }
