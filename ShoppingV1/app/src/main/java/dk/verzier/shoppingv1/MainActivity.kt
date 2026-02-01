@@ -56,4 +56,39 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
+    override fun onStart() {
+        super.onStart()
+        showToast("LIFECYCLE: onStart()")
+        Log.d("LIFECYCLE", "onStart() called")
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        showToast("LIFECYCLE: onResume()")
+        Log.d("LIFECYCLE", "onResume() called")
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        showToast("LIFECYCLE: onPause()")
+        Log.d("LIFECYCLE", "onPause() called")
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        showToast("LIFECYCLE: onStop()")
+        Log.d("LIFECYCLE", "onStop() called")
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        showToast("LIFECYCLE: onDestroy()")
+        Log.d("LIFECYCLE", "onDestroy() called")
+    }
 }
