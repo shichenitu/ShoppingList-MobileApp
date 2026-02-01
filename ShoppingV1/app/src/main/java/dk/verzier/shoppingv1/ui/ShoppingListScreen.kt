@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import dk.verzier.shoppingv1.R
 import dk.verzier.shoppingv1.ui.theme.ShoppingV1Theme
 
+
 @Composable
 fun ShoppingListScreen(modifier: Modifier = Modifier) {
     Column(
@@ -27,7 +28,7 @@ fun ShoppingListScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var showShoppingList: Boolean by remember { mutableStateOf(value = false) }
+        var showShoppingList: Boolean by rememberSaveable { mutableStateOf(value = false) }
 
         val shoppingList: List<String> = listOf(
             "Buy coffee in: Føtex",
