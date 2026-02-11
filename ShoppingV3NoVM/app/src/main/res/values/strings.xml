@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ShoppingV3NoVM</string>
+    <string name="list_label">Shopping list</string>
+    <string name="list_item_label">Buy %1$s in: %2$s</string>
+    <string name="list_button_label">List all items</string>
+    <string name="hide_button_label">Hide all items</string>
+    <string name="add_button_label">Add item</string>
+    <string name="what_label">What</string>
+    <string name="where_label">Where</string>
+    <string name="item_removed_label">Item "%1$s" from "%2$s" was removed</string>
+    <string name="undo_label">Undo</string>
+    <string name="textfield_error_message">Both input fields must be filled in</string>
+    <string name="undo_confirmation_message">The deletion was undone</string>
+</resources>
