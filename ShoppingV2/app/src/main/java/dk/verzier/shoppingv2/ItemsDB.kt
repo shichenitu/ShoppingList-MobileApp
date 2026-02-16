@@ -27,7 +27,9 @@ object ItemsDB {
         val formattedItem =
             item.copy(what = item.what.toTitleCase(), where = item.where.toTitleCase())
 
-        _shoppingList.add(formattedItem)
+        if (!_shoppingList.contains(formattedItem)) {
+            _shoppingList.add(formattedItem)
+        }
     }
 
     fun removeItem(item: Item) {
