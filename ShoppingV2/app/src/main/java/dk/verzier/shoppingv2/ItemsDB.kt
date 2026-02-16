@@ -13,7 +13,7 @@ object ItemsDB {
         Item(what = "Butter", where = "Føtex")
     )
 
-    val shoppingList: List<Item> get() = _shoppingList.toList()
+    val shoppingList: List<Item> get() = _shoppingList.sortedWith (compareBy ({it.where} , {it.what}))
 
     // Extension function to handle Title Case formatting
     private fun String.toTitleCase(): String {
@@ -27,7 +27,9 @@ object ItemsDB {
         val formattedItem =
             item.copy(what = item.what.toTitleCase(), where = item.where.toTitleCase())
 
-        _shoppingList.add(formattedItem)
+        if (!_shoppingList.contains(formattedItem)) {
+            _shoppingList.add(formattedItem)
+        }
     }
 
     fun removeItem(item: Item) {
