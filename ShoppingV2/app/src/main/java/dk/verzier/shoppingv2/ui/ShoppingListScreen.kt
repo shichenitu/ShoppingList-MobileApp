@@ -69,7 +69,6 @@ fun ShoppingListScreen(modifier: Modifier = Modifier, snackbarHostState: Snackba
                             id = R.string.list_item_label, item.what.lowercase(), item.where
                         ),
                         modifier = Modifier.clickable {
-                            ItemsDB.removeItem(item)
                             scope.launch {
                                 val result = snackbarHostState
                                     .showSnackbar(
@@ -84,6 +83,7 @@ fun ShoppingListScreen(modifier: Modifier = Modifier, snackbarHostState: Snackba
 
                                     SnackbarResult.Dismissed -> {
                                         /* Handle snackbar dismissed */
+                                        ItemsDB.removeItem(item)
                                     }
                                 }
                             }
