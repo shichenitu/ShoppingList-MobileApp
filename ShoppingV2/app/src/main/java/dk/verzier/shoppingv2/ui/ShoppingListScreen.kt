@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dk.verzier.shoppingv2.Item
 import dk.verzier.shoppingv2.ItemsDB
 import dk.verzier.shoppingv2.R
 import dk.verzier.shoppingv2.ui.theme.ShoppingV2Theme
@@ -93,7 +94,15 @@ fun ShoppingListScreen(modifier: Modifier = Modifier, snackbarHostState: Snackba
         }
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            Button(onClick = {}) {
+            Button(onClick = {
+                if (what.isNotBlank()) {
+                    val newItem = Item(what = what , where = where)
+                    ItemsDB.addItem(newItem)
+                    what = ""
+                    where = ""
+                    showShoppingList = true
+                }
+            }) {
                 Text(text = stringResource(id = R.string.add_button_label))
             }
             Button(onClick = { showShoppingList = !showShoppingList }) {
