@@ -1,5 +1,6 @@
 package dk.verzier.shoppingv3.ui.features
 
+import android.R.attr.visible
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import javax.annotation.concurrent.Immutable
@@ -31,13 +33,21 @@ class ShoppingListViewModel @Inject constructor(
                 initialValue = emptyList()
             )
 
+    private val itemWhat: MutableStateFlow<String> = MutableStateFlow(value = "")
+    private val itemWhere: MutableStateFlow<String> = MutableStateFlow(value = "")
+
     val uiState: StateFlow<UiState> = combine(
         flow = shoppingList,
-        flow2 = shoppingListVisibility
-    ) { currentShoppingList, currentListVisibility ->
+        flow2 = shoppingListVisibility,
+        flow3 = itemWhat,
+        flow4 = itemWhere
+    ) { currentShoppingList, currentListVisibility, what, where ->
         UiState(
             shoppingList = currentShoppingList,
-            displayShoppingList = currentListVisibility
+            displayShoppingList = currentListVisibility,
+            itemWhat = what,
+            itemWhere = where,
+            toggleListVisibilityButtonLabel = if (currentListVisibility) R.string.hide_button_label else R.string.list_button_label
         )
     }.stateIn(
         scope = viewModelScope,
@@ -46,12 +56,22 @@ class ShoppingListViewModel @Inject constructor(
     )
 
     val uiEvents = object : UiEvents {
+        override fun onWhatChange(newValue: String) {
+            itemWhat.update { newValue }
+        }
+
+        override fun onWhereChange(newValue: String) {
+            itemWhere.update { newValue }
+        }
+
         override fun onAddItemClick(
             itemWhat: String,
             itemWhere: String,
         ) {
             if (itemWhat.isNotBlank() && itemWhere.isNotBlank()) {
                 itemRepository.addItem(Item(what = itemWhat.trim(), where = itemWhere.trim()))
+                this@ShoppingListViewModel.itemWhat.update { "" }
+                this@ShoppingListViewModel.itemWhere.update { "" }
             } else {
                 snackBarHandler.postMessage(msgRes = R.string.textfield_error_message)
             }
@@ -80,6 +100,8 @@ class ShoppingListViewModel @Inject constructor(
     data class UiState(
         val shoppingList: List<Item> = emptyList(),
         val displayShoppingList: Boolean = false,
+        val itemWhat: String = "",
+        val itemWhere: String = "",
         @get:StringRes val toggleListVisibilityButtonLabel: Int = R.string.list_button_label
     )
 
@@ -88,5 +110,7 @@ class ShoppingListViewModel @Inject constructor(
         fun onAddItemClick(itemWhat: String, itemWhere: String)
         fun onRemoveItemClick(item: Item)
         fun onToggleListVisibilityClick()
+        fun onWhatChange(newValue: String)
+        fun onWhereChange(newValue: String)
     }
 }
