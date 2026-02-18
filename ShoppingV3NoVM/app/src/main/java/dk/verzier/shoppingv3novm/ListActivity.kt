@@ -23,11 +23,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import dk.verzier.shoppingv3novm.ui.Item
 import dk.verzier.shoppingv3novm.ui.ShoppingListScreen
 import dk.verzier.shoppingv3novm.ui.theme.ShoppingV3NoVMTheme
 
 class ListActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,6 +37,7 @@ class ListActivity : ComponentActivity() {
             ShoppingV3NoVMTheme {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val context = LocalContext.current
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
@@ -66,7 +69,11 @@ class ListActivity : ComponentActivity() {
                     ShoppingListScreen(
                         modifier = Modifier.padding(paddingValues = innerPadding),
                         snackbarHostState = snackbarHostState,
-                        itemToAdd = /* handle new Item to be added */ null
+                        itemToAdd = intent.getStringExtra("EXTRA_WHAT")?.let { what ->
+                            intent.getStringExtra("EXTRA_WHERE")?.let { where ->
+                                Item(what = what, where = where)
+                            }
+                        }
                     )
                 }
             }
