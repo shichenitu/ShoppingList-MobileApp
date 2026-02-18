@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,8 +58,8 @@ private fun ShoppingListScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var what by remember { mutableStateOf(value = "") }
-        var where by remember { mutableStateOf(value = "") }
+        var what by rememberSaveable { mutableStateOf(value = "") }
+        var where by rememberSaveable { mutableStateOf(value = "") }
         val focusManager = LocalFocusManager.current
 
         TextField(
