@@ -1,5 +1,6 @@
 package dk.verzier.shoppingv3novm.ui
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +48,8 @@ private fun String.toTitleCase(): String {
 
 @Composable
 fun ShoppingListScreen(modifier: Modifier = Modifier, snackbarHostState: SnackbarHostState, itemToAdd: Item?) {
+
+    val context = LocalContext.current
 
     val shoppingList = remember {
         mutableStateListOf(
@@ -121,7 +125,22 @@ fun ShoppingListScreen(modifier: Modifier = Modifier, snackbarHostState: Snackba
                         }
                     }
                 )
-                IconButton(modifier = Modifier.padding(end = 14.dp), onClick = { /* Handle email to a friend action */ }) {
+                IconButton(
+                    modifier = Modifier.padding(end = 14.dp),
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = android.net.Uri.parse("mailto:")
+                            putExtra(Intent.EXTRA_SUBJECT, "Shopping List Item: ${item.what}")
+                            putExtra(Intent.EXTRA_TEXT, "Hi! Please remember to buy ${item.what} at ${item.where}.")
+                        }
+
+                        try {
+                            context.startActivity(intent)
+                        } catch (e: Exception) {
+                            // empty
+                        }
+                    }
+                ) {
                     Icon(
                         imageVector = Icons.Default.Share,
                         contentDescription = "Share"
