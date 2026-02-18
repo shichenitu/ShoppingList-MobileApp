@@ -68,7 +68,7 @@ fun ShoppingListScreen(modifier: Modifier = Modifier, snackbarHostState: Snackba
 
     var hasProcessedIntent by rememberSaveable { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(itemToAdd) {
         if (itemToAdd != null && !hasProcessedIntent) {
             addItem(itemToAdd)
             hasProcessedIntent = true

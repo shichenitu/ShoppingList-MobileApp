@@ -38,6 +38,7 @@ fun AddItemScreen(modifier: Modifier = Modifier, snackbarHostState: SnackbarHost
     ) {
         var what by remember { mutableStateOf(value = "") }
         var where by remember { mutableStateOf(value = "") }
+        val context = LocalContext.current
 
         TextField(
             value = what,
@@ -59,6 +60,14 @@ fun AddItemScreen(modifier: Modifier = Modifier, snackbarHostState: SnackbarHost
             Button(onClick = {
                 if (what.isNotBlank() && where.isNotBlank()) {
                     // Add missing behaviour
+
+                    val activity = context as? android.app.Activity
+                    val resultIntent = Intent().apply {
+                        putExtra("EXTRA_WHAT", what)
+                        putExtra("EXTRA_WHERE", where)
+                    }
+                    activity?.setResult(android.app.Activity.RESULT_OK, resultIntent)
+                    activity?.finish()
                 } else {
                     scope.launch {
                         snackbarHostState.showSnackbar(snackbarMessage)
@@ -69,7 +78,10 @@ fun AddItemScreen(modifier: Modifier = Modifier, snackbarHostState: SnackbarHost
             }
             val context = LocalContext.current
             Button(onClick = {
-                val intent = Intent(/* packageContext = */ context, /* cls = */ ListActivity::class.java)
+                val intent = Intent(/* packageContext = */ context, /* cls = */ ListActivity::class.java).apply {
+                    putExtra("EXTRA_WHAT", what)
+                    putExtra("EXTRA_WHERE", where)
+                }
                 context.startActivity(/* p0 = */ intent)
             }) {
                 Text(text = stringResource(id = R.string.list_button_label))
