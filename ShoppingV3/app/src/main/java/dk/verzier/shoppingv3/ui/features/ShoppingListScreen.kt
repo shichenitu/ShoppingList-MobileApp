@@ -58,21 +58,20 @@ private fun ShoppingListScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var what by rememberSaveable { mutableStateOf(value = "") }
-        var where by rememberSaveable { mutableStateOf(value = "") }
+
         val focusManager = LocalFocusManager.current
 
         TextField(
-            value = what,
-            onValueChange = { what = it },
+            value = uiState.itemWhat,
+            onValueChange = { uiEvents.onWhatChange(it) },
             label = { Text(text = stringResource(id = R.string.what_label)) },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(FocusDirection.Next) })
         )
         Spacer(Modifier.height(16.dp))
         TextField(
-            value = where,
-            onValueChange = { where = it },
+            value = uiState.itemWhere,
+            onValueChange = { uiEvents.onWhereChange(it) },
             label = { Text(text = stringResource(id = R.string.where_label)) },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
@@ -96,15 +95,13 @@ private fun ShoppingListScreen(
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             Button(onClick = {
-                uiEvents.onAddItemClick(itemWhat = what, itemWhere = where)
-                what = ""
-                where = ""
+                uiEvents.onAddItemClick(itemWhat = uiState.itemWhat, itemWhere = uiState.itemWhere)
                 focusManager.clearFocus()
             }) {
                 Text(text = stringResource(id = R.string.add_button_label))
             }
             Button(onClick = uiEvents::onToggleListVisibilityClick) {
-                Text(text = stringResource(id = if (!uiState.displayShoppingList) R.string.list_button_label else R.string.hide_button_label))
+                Text(text = stringResource(id = uiState.toggleListVisibilityButtonLabel))
             }
         }
     }
@@ -121,6 +118,8 @@ fun ShoppingListScreenPreview() {
                 override fun onAddItemClick(itemWhat: String, itemWhere: String) {}
                 override fun onRemoveItemClick(item: Item) {}
                 override fun onToggleListVisibilityClick() {}
+                override fun onWhatChange(newValue: String) {}
+                override fun onWhereChange(newValue: String) {}
             }
         )
     }
