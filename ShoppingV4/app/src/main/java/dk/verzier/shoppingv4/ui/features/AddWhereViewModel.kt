@@ -53,7 +53,10 @@ class AddWhereViewModel @Inject constructor(
         }
 
         override fun onCancelClick() {
-            TODO("Not yet implemented")
+            // TODO("Not yet implemented")
+            viewModelScope.launch {
+                _navigationEvents.emit(value = NavigationEvent.NavigateToShoppingList)
+            }
         }
     }
 
