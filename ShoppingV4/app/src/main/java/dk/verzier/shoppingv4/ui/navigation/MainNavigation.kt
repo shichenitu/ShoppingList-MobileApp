@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import androidx.navigation.navOptions
 import dk.verzier.shoppingv4.ui.features.AddWhat
 import dk.verzier.shoppingv4.ui.features.AddWhatScreen
@@ -60,6 +61,9 @@ fun MainNavigation(modifier: Modifier = Modifier) {
             composable<Details>(
                 deepLinks = listOf(
                     // TODO add deep linking matching the following URI pattern: "shopping://items/{itemId}" - check the intent-filter in the AndroidManifest.xml file
+                    navDeepLink {
+                        uriPattern = "shopping://items/{itemId}"
+                    }
                 ),
                 enterTransition = {
                     slideIntoContainer(
