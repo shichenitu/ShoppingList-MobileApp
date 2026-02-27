@@ -119,6 +119,10 @@ private fun AddWhereScreen(
                 Button(onClick = uiEvents::onDoneClick) {
                     Text(text = "Done")
                 }
+
+                Button(onClick = uiEvents::onCancelClick) {
+                    Text(text = "Cancel")
+                }
             }
         }
     }
