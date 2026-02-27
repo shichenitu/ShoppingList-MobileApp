@@ -91,6 +91,7 @@ fun MainNavigation(modifier: Modifier = Modifier) {
                         when (event) {
                             is DetailsViewModel.NavigationEvent.NavigateUp -> {
                                 // TODO add back button logic
+                                navController.navigateUp()
                             }
                         }
                     }
@@ -128,6 +129,7 @@ fun MainNavigation(modifier: Modifier = Modifier) {
                     when (event) {
                         is AddWhatViewModel.NavigationEvent.NavigateUp -> {
                             // TODO add back button logic
+                            navController.navigateUp()
                         }
 
                         is AddWhatViewModel.NavigationEvent.NavigateToAddWhere -> navController.navigate(
