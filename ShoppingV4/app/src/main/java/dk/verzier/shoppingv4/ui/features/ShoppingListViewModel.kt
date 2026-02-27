@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.annotation.concurrent.Immutable
 import javax.inject.Inject
+import kotlin.String
 
 @HiltViewModel
 class ShoppingListViewModel @Inject constructor(private val itemRepository: ItemRepository) :
@@ -42,6 +43,7 @@ class ShoppingListViewModel @Inject constructor(private val itemRepository: Item
         override fun onEditItemClick(item: Item) {
             viewModelScope.launch {
                 // TODO add navigation to DetailsScreen logic
+                _navigationEvents.emit(value = NavigationEvent.NavigateToDetails(itemId = item.id))
             }
         }
     }

@@ -24,6 +24,7 @@ import dk.verzier.shoppingv4.ui.features.ShoppingGraph
 import dk.verzier.shoppingv4.ui.features.ShoppingList
 import dk.verzier.shoppingv4.ui.features.ShoppingListScreen
 import dk.verzier.shoppingv4.ui.features.ShoppingListViewModel
+import kotlin.String
 
 @Composable
 fun MainNavigation(modifier: Modifier = Modifier) {
@@ -47,9 +48,11 @@ fun MainNavigation(modifier: Modifier = Modifier) {
                                 navOptions = singleTopNavOptions
                             )
 
-                            is ShoppingListViewModel.NavigationEvent.NavigateToDetails -> {
+                            is ShoppingListViewModel.NavigationEvent.NavigateToDetails -> navController.navigate (
                                 // TODO add navigation to DetailsScreen logic
-                            }
+                                route = Details(itemId = event.itemId),
+                                navOptions = singleTopNavOptions
+                            )
                         }
                     }
                 )
