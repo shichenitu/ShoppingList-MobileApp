@@ -147,12 +147,12 @@ private fun ListItem(item: Item, imageUrl: String?, brandColor: Color?, onItemCl
                 Text(
                     text = item.what,
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                    color = Color.Unspecified // TODO Match brand colour
+                    color = brandColor ?: MaterialTheme.colorScheme.onSurface // TODO Match brand colour
                 )
                 Text(
                     text = item.fullDescription(context = LocalContext.current),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Unspecified  // TODO Match brand colour
+                    color = brandColor ?: MaterialTheme.colorScheme.onSurface  // TODO Match brand colour
                 )
             }
 
