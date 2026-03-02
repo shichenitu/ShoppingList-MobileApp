@@ -25,7 +25,6 @@ import dk.verzier.shoppingv4.ui.features.ShoppingGraph
 import dk.verzier.shoppingv4.ui.features.ShoppingList
 import dk.verzier.shoppingv4.ui.features.ShoppingListScreen
 import dk.verzier.shoppingv4.ui.features.ShoppingListViewModel
-import kotlin.String
 
 @Composable
 fun MainNavigation(modifier: Modifier = Modifier) {

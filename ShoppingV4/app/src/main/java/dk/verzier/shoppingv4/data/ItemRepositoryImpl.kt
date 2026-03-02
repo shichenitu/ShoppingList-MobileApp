@@ -81,10 +81,12 @@ class ItemRepositoryImpl @Inject constructor() : ItemRepository {
     }
 
     override fun updateItem(item: Item) {
+        val formattedItemDto = item.copy(what = item.what.toTitleCase(), where = item.where.toTitleCase()).toDto()
+
         _shoppingList.update { currentList ->
             currentList.map {
-                if (it.id == item.id) {
-                    item.toDto()
+                if (it.id == formattedItemDto.id) {
+                    formattedItemDto
                 } else {
                     it
                 }
