@@ -57,6 +57,25 @@ fun DetailsSheet(
 
     if (showDeleteConfirmation) {
         // TODO Add delete confirmation dialog. Hint: use AlertDialog
+        AlertDialog(
+            onDismissRequest = uiEvents::onDismissDeleteConfirmation,
+            title = {
+                Text(text = stringResource(id = R.string.delete_item_title))
+            },
+            text = {
+                Text(text = stringResource(id = R.string.delete_item_confirmation))
+            },
+            confirmButton = {
+                TextButton(onClick = uiEvents::onConfirmDelete) {
+                    Text(text = stringResource(id = R.string.delete_button_label))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = uiEvents::onDismissDeleteConfirmation) {
+                    Text(text = stringResource(id = R.string.cancel_button_label))
+                }
+            }
+        )
     }
 
     ModalBottomSheet(

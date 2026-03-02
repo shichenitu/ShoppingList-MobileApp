@@ -99,6 +99,7 @@ class ShoppingListViewModel @Inject constructor(
 
         override fun onDeleteClick() {
             // TODO Show the delete confirmation dialog
+            _uiState.update { it.copy(showDeleteConfirmation = true) }
         }
 
         override fun onConfirmDelete() {
@@ -110,6 +111,7 @@ class ShoppingListViewModel @Inject constructor(
 
         override fun onDismissDeleteConfirmation() {
             // TODO Hide the delete confirmation dialog
+            _uiState.update { it.copy(showDeleteConfirmation = false) }
         }
 
         override fun onDismissDetails() {
