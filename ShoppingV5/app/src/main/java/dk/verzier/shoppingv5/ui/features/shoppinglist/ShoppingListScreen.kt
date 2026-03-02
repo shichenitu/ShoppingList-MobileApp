@@ -101,13 +101,13 @@ private fun ShoppingListScreen(
         }
     ) { contentPadding ->
         // TODO Switch to LazyColumn
-        Column(
+        // TODO Hint: Use LazyListScope.items instead of uiState.shoppingList.forEach
+        LazyColumn(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues = contentPadding)
         ) {
-            // TODO Hint: Use LazyListScope.items instead of uiState.shoppingList.forEach
-            uiState.shoppingList.forEach { item ->
+            items(uiState.shoppingList) { item ->
                 val shop = uiState.shops.find { it.name == item.where }
                 ListItem(
                     item = item,
