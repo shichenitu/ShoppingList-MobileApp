@@ -69,6 +69,7 @@ abstract class ShoppingDatabase : RoomDatabase() {
                         what = it.what,
                         where = it.where,
                         description = it.description,
+                        deadline = it.deadline
                     )
                 )
 

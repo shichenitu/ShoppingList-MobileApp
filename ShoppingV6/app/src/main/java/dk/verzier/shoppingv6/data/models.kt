@@ -14,6 +14,7 @@ data class ItemDto(
     val where: String,
     val description: String = "",
     // TODO: Add deadline to item
+    val deadline: String = ""
 )
 
 data class ShopDto(
@@ -40,6 +41,7 @@ fun ItemDto.toEntity() = ItemEntity(
     what = what,
     where = where,
     description = description,
+    deadline = deadline
 )
 
 fun ItemEntity.toItemDto() = ItemDto(
