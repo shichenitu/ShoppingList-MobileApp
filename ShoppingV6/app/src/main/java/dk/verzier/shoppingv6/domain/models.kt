@@ -13,7 +13,7 @@ data class Item(
     val where: String,
     val description: String = "",
     // TODO: Add deadline to item
-    val deadline: String = ""
+    val deadline: String? = null
 )
 
 data class Shop(
