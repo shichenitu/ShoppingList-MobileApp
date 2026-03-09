@@ -28,6 +28,7 @@ fun ItemDto.toItem(): Item = Item(
     what = this.what,
     where = this.where,
     description = this.description,
+    deadline = this.deadline
 )
 
 fun ShopDto.toShop(): Shop = Shop(
@@ -49,6 +50,7 @@ fun ItemEntity.toItemDto() = ItemDto(
     what = what,
     where = where,
     description = description,
+    deadline = deadline
 )
 
 fun ShopEntity.toShopDto() = ShopDto(
