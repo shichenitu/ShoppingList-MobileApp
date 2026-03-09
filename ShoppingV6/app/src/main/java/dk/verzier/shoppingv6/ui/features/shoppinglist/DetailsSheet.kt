@@ -198,6 +198,13 @@ fun DetailsSheet(
             )
 
             // TODO: Add the following if a deadline is available
+            item.deadline?.let {
+                Spacer(Modifier.height(height = 8.dp))
+                Text(
+                    text = stringResource(id = R.string.deadline_set, it),
+                    color = Color.Gray
+                )
+            }
                 /*Spacer(Modifier.height(height = 8.dp))
                 Text(
                     text = stringResource(id = R.string.deadline_set, it),
@@ -207,6 +214,15 @@ fun DetailsSheet(
             Spacer(Modifier.height(height = 8.dp))
 
             // TODO: Show "Add/Update deadline" string depending on deadline state
+            val buttonText = if (item.deadline.isNullOrBlank()) {
+                stringResource(id = R.string.add_deadline_button_label)
+            } else {
+                stringResource(id = R.string.update_deadline_button_label)
+            }
+
+            Button(onClick = { showDatePicker = true }) {
+                Text(text = buttonText)
+            }
             /*Button(onClick = { showDatePicker = true }) {
                 Text(text = buttonText)
             }*/

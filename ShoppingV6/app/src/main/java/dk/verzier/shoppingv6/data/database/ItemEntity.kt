@@ -11,4 +11,5 @@ data class ItemEntity(
     val where: String,
     val description: String,
     // TODO: Add deadline to item
+    val deadline: String?
 )

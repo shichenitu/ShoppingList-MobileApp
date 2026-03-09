@@ -88,9 +88,11 @@ class ShoppingListViewModel @Inject constructor(
                 )
                 format.format(date)
             }
-            _uiState.update {
+            _uiState.update { currentState ->
                 // TODO add/update deadline in selected item
-                it.copy(selectedItem = it.selectedItem?.copy())
+                currentState.copy(
+                    selectedItem = currentState.selectedItem?.copy(deadline = formattedDeadline)
+                )
             }
         }
 

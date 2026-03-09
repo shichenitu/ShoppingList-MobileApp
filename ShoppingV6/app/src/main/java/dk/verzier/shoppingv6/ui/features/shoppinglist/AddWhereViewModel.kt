@@ -40,7 +40,7 @@ class AddWhereViewModel @Inject constructor(
             if (what.isNotBlank() && uiState.value.where.isNotBlank()) {
                 viewModelScope.launch {
                     // TODO: Add deadline to item
-                    itemRepository.addItem(item = Item(what = what, where = uiState.value.where))
+                    itemRepository.addItem(item = Item(what = what, where = uiState.value.where, deadline = deadline))
                     _navigationEvents.emit(value = NavigationEvent.NavigateToShoppingList)
                 }
             } else {
