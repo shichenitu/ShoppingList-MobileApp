@@ -34,10 +34,13 @@ class UserPreferencesRepositoryImpl @Inject constructor(@param:ApplicationContex
         }
 
     override suspend fun setTheme(theme: Theme) {
+        // TODO: Map preferences keys to values
         context.dataStore.edit { preferences ->
-            /*preferences[PreferencesKeys.THEME] = when (theme) {
-                // TODO: Map preferences keys to values
-            }*/
+            preferences[PreferencesKeys.THEME] = when (theme) {
+                Theme.LIGHT -> "light"
+                Theme.DARK -> "dark"
+                Theme.SYSTEM -> "system"
+            }
         }
     }
 }
