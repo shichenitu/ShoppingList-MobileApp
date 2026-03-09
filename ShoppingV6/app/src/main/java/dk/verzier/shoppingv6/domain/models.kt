@@ -28,7 +28,7 @@ enum class Theme {
     DARK
 }
 
-fun Item.toDto(): ItemDto = ItemDto(id = this.id, what = this.what, where = this.where, description = this.description)
+fun Item.toDto(): ItemDto = ItemDto(id = this.id, what = this.what, where = this.where, description = this.description, deadline = this.deadline)
 fun Shop.toDto(): ShopDto = ShopDto(name = this.name, imageUrl = this.imageUrl, brandColor = this.brandColor.value.toString())
 
 fun Item.fullDescription(context: Context): String =
