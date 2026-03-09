@@ -85,6 +85,23 @@ private fun SettingsScreen(
                     )
                 )
                 // TODO: Add an ExposedDropdownMenu & a DropdownMenuItem for each Theme.entries. NB: Theme names needs to be lowercase.
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    Theme.entries.forEach { theme ->
+                        DropdownMenuItem(
+                            text = {
+                                Text(text = theme.name.lowercase())
+                            },
+                            onClick = {
+                                uiEvents.onSetTheme(theme)
+                                expanded = false
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                        )
+                    }
+                }
             }
         }
     }
